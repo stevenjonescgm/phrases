@@ -13,7 +13,29 @@ class App
 
   def run
     puts "options: #{options}" if options[:verbose]
-    # puts @stream.read
-    @stream.read
+
+    # STDIN.readlines
+    # TODO: go to scale by reading bytes rather than lines
+    # For starters, read by line.
+    @stream.each do |terms|
+      # To get to near-word streaming, I prioritized splitting on whitespace ' ' instead of newline
+      # So terms could include newlines
+      #   (which turns out useful for hyphen line endings)
+
+      # make case insensitive
+      terms = terms.downcase
+
+      # clean up punctuation and newlines
+      # convert hyphen line-endings
+      terms = terms.gsub(/-\n/, '')
+
+      # strip punctuation and newlines (inverted, so select words including contractions)
+      # terms = terms.gsub(/(?!\w'\w|\w)/)
+      cleaned = /((?:\w'\w)|\w)+/.match terms
+
+      # puts cleaned
+    end
+
+
   end
 end

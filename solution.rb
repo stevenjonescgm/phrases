@@ -27,9 +27,9 @@ end.parse!
     puts "Invalid filename '#{@filename }'"
     exit -1
   end
-  File.open(@filename )
+  File.readlines(@filename, ' ' )
 else # expect input from stdin
-  STDIN
+  STDIN.readlines(' ')
 end
 
 phrases = App.new(@stream, options).run

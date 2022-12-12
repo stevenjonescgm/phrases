@@ -21,11 +21,21 @@ describe 'App' do
     end
 
     it 'runs trivial sample' do
+      skip 'App now returns a data structure for CLI to print'
       file = File.open('spec/trivial_sample.txt')
       app = App.new(file)
-      expect(app.run).to eq(nil)
+      expect(app.run).to eq({
+                              "some basic data" => 3,
+                              "another across lines" => 2,
+                            })
     end
   end
 
+  context 'from STDIN/StringIO' do
+    it 'parses basic phrase' do
+      source = %w[some basic phrase]
+      expect(App.new(source).run).to eq({ 'some basic phrase' => 1 })
+    end
+  end
 
 end
