@@ -33,4 +33,10 @@ else # expect input from stdin
 end
 
 phrases = App.new(@stream, options).run
-puts phrases
+phrases.each do |sequence, count|
+  if options[:verbose]
+    puts "#{sequence} => #{count}"
+  else
+    puts sequence
+  end
+end
