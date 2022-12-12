@@ -1,7 +1,5 @@
 # use active_support for convenience, before considering removal for performance
 require 'active_support'
-# develop with a timeout for
-require 'timeout'
 
 class App
   attr_accessor :stream, :options, :phrases
