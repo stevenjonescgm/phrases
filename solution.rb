@@ -33,6 +33,11 @@ else # expect input from stdin
 end
 
 phrases = App.new(@stream, options).run
+
+# TODO: consider providing texts to App after initialization
+# TODO: consider moving sorting (and top 100) into App
+phrases = phrases.sort_by{|_phrase, count| -count}.first(100)
+
 phrases.each do |sequence, count|
   if options[:verbose]
     puts "#{sequence} => #{count}"
