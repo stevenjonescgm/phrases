@@ -12,7 +12,8 @@ class App
   end
 
   def run
-    puts options
-    puts @stream.read
+    puts "options: #{options}" if options[:verbose]
+    # puts @stream.read
+    @stream.read
   end
 end

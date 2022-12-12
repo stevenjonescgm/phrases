@@ -32,4 +32,5 @@ else # expect input from stdin
   STDIN
 end
 
-App.new(@stream, options).run
+phrases = App.new(@stream, options).run
+puts phrases
