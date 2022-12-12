@@ -6,8 +6,8 @@
 # optparse for starting a decent UX around a command line executable
 require 'optparse'
 
-# use active_support for convenience, before considering removal for performance
-require 'active_support'
+require_relative 'app/app'
+
 
 options = {}
 OptionParser.new do |opts|
@@ -21,19 +21,15 @@ end.parse!
 # p options
 # p ARGV
 
-
-class App
-  attr_accessor :filename, :options
-
-  def initialize(filename = nil, options = {})
-    @filename = filename.presence
-    @options = options
+@filename = ARGV[0]
+@stream = if @filename # a filename was provided
+  unless File.exists?(@filename )
+    puts "Invalid filename '#{@filename }'"
+    exit -1
   end
-
-  def run
-    puts filename
-    puts options
-  end
+  File.open(@filename )
+else # expect input from stdin
+  STDIN
 end
 
-App.new(ARGV[0], options).run
+App.new(@stream, options).run
