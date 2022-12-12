@@ -38,6 +38,10 @@ class App
     @phrases
   end
 
+  def inspect
+    [@options, @last_phrase.join(" "), @phrases.first(3)].join("\n")
+  end
+
   private
 
   def normalize_words(terms)
@@ -56,7 +60,7 @@ class App
     # terms = terms.gsub(/(?!\w'\w|\w)/)
     # TODO: consider double-contractions, such as "they'd've" which this treats as
     # ["they'd", "ve"]
-    terms = terms.scan(/((?:\w'\w|\w)+)/)
+    terms = terms.scan(/((?:\w['’]\w|\w)+)/)
 
     # NOTE: static style analysis dislikes this, but it keeps git history more clean
     #noinspection RubyUnnecessaryReturnValue

@@ -36,6 +36,15 @@ describe 'App' do
       source = %w[some basic phrase]
       expect(App.new(source).run).to eq({ 'some basic phrase' => 1 })
     end
+
+    # insignificant of the Pequod’s crew; an event most lamentable
+    it 'parses phrase with unicode quote (’)' do
+      source = %w[of the Pequod’s crew]
+      expect(App.new(source).run).to eq({
+                                          'of the pequod’s' => 1,
+                                          'the pequod’s crew' => 1,
+                                        })
+    end
   end
 
 end
