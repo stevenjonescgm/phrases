@@ -3,12 +3,18 @@ simple exercise, collect frequent word sequences
 
 # Setup
 ```shell
+  # assumed Ruby runtime and Bundler installed.
+  # should be agnostic to runtime manager (rvm, rbenv, asdf)
   bundle install
 ```
 
 # Run
 ```shell
+  # Examples
   ruby solution.rb moby-dick.txt
+  ruby solution.rb moby-dick.txt brothers-karamazov.txt
+  more brothers-karamazov.txt | ruby solution.rb
+  echo "a simple string" | ruby solution.rb
 ```
 
 # Test
@@ -28,3 +34,7 @@ So I decided to extract the operational class from the CLI entry point.
    1. Should the texts be combined? (aggregating sequences)
       1. If no, how should the various texts be identified?
    2. Should the last word of one text be bridged to the first word of next text?
+
+# Next Steps
+
+# Known Bugs

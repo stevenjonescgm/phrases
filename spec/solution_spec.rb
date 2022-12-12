@@ -13,7 +13,7 @@ describe 'solution.rb' do
   it 'prints usage if no text (nor pipe)' do
     status = `ruby solution.rb`
     expect(status).to eq <<~HELP
-       Usage: solution.rb [options] [filename]
+       Usage: solution.rb [options] [filename ...]
            -v, --[no-]verbose               Run verbosely
     HELP
   end

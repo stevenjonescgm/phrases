@@ -2,10 +2,9 @@
 require 'active_support'
 
 class App
-  attr_accessor :stream, :options, :phrases
+  attr_accessor :options, :phrases
 
-  def initialize(stream, options = {})
-    @stream = stream
+  def initialize(options = {})
     @options = options
 
     # Simple array to track phrases across text(s) ingestion
@@ -20,13 +19,13 @@ class App
     @phrases = Hash.new(0)
   end
 
-  def run
+  def run(text)
     puts "options: #{options}" if options[:verbose]
 
     # STDIN.readlines
     # TODO: go to scale by reading bytes rather than lines
     # For starters, read by line.
-    @stream.each do |terms|
+    text.each do |terms|
       words = normalize_words(terms)
       words.each do |word|
         ingest(word)

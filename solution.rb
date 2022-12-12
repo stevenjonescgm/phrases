@@ -9,7 +9,7 @@ require_relative 'app/app'
 
 options = {}
 option_parser = OptionParser.new do |opts|
-  opts.banner = "Usage: solution.rb [options] [filename]"
+  opts.banner = "Usage: solution.rb [options] [filename ...]"
 
   opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
     options[:verbose] = v
@@ -17,24 +17,31 @@ option_parser = OptionParser.new do |opts|
 end
 option_parser.parse!
 
-# p options
-# p ARGV
+@filenames = ARGV[0..-1]
 
-@filename = ARGV[0]
-@stream = if @filename # a filename was provided
-  unless File.exists?(@filename)
-    puts "Invalid filename '#{@filename }'"
-    exit -1
+@texts = []
+if @filenames.any?
+  # one or more filenames were provided
+  @filenames.each do |filename|
+    unless File.exists?(filename)
+      puts "Invalid filename '#{filename}'"
+      exit -1
+    end
+    @texts << File.readlines(filename, ' ')
   end
-  File.readlines(@filename, ' ')
 elsif !STDIN.tty? # expect input from stdin
-  STDIN.readlines(' ')
+  @texts << STDIN.readlines(' ')
 else
   puts option_parser.help
   exit
 end
 
-phrases = App.new(@stream, options).run
+app = App.new(options)
+@texts.each do |text|
+  app.run(text)
+end
+
+phrases = app.phrases
 
 # TODO: consider providing texts to App after initialization
 # TODO: consider moving sorting (and top 100) into App

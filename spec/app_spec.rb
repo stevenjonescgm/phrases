@@ -5,6 +5,7 @@ require_relative '../app/app'
 require 'timeout'
 
 describe 'App' do
+  subject(:app) { App.new }
   # Use timeout to ensure app doesn't soft-lock (or stall awaiting STDIN)
   around do |example|
     Timeout.timeout(5) do
@@ -25,13 +26,13 @@ describe 'App' do
   context 'trivial single source' do
     it 'parses basic phrase' do
       source = %w[some basic phrase]
-      expect(App.new(source).run).to eq({ 'some basic phrase' => 1 })
+      expect(app.run(source)).to eq({ 'some basic phrase' => 1 })
     end
 
     # insignificant of the Pequod’s crew; an event most lamentable
     it 'parses phrase with unicode quote (’)' do
       source = %w[of the Pequod’s crew]
-      expect(App.new(source).run).to eq({
+      expect(app.run(source)).to eq({
                                           'of the pequod’s' => 1,
                                           'the pequod’s crew' => 1,
                                         })
