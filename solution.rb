@@ -45,7 +45,16 @@ phrases = app.phrases
 
 # TODO: consider providing texts to App after initialization
 # TODO: consider moving sorting (and top 100) into App
-phrases = phrases.sort_by { |_phrase, count| -count }.first(100)
+# TODO: Reconsider secondary alphabetical sort (added to simplify BDD test cases)
+# phrases = phrases.sort_by { |_phrase, count| -count }
+phrases = phrases.sort do |(a_phrase, a_count), (b_phrase, b_count)|
+  # primary sort: count numerical descending
+  primary = -a_count <=> -b_count
+  # secondary sort: phrase alphabetical ascending
+  primary == 0 ? a_phrase <=> b_phrase : primary
+end
+
+phrases = phrases.first(100)
 
 phrases.each do |sequence, count|
   if options[:verbose]

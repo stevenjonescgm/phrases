@@ -19,7 +19,8 @@ simple exercise, collect frequent word sequences
 
 # Test
 ```shell
-  rspec
+  rspec # all tests
+  bundle exec rspec spec/solution_spec.rb:31 # explicit test, in case desired/environment issue
 ```
 
 # Notes
@@ -36,5 +37,10 @@ So I decided to extract the operational class from the CLI entry point.
    2. Should the last word of one text be bridged to the first word of next text?
 
 # Next Steps
+1. Consider optimizing the phrases storage to be Binary Search Tree/Priority Search Tree to reduce cost of sorting
+2. explicit tests for BDD cases, eg "100 most common" and "bonus points"
+3. Another pass at cleaning up test output (especially skips)
 
 # Known Bugs
+1. code was intended to squeeze hyphenated-end-of-line, but does not
+

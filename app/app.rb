@@ -51,6 +51,7 @@ class App
 
     # clean up punctuation and newlines
     # convert hyphen line-endings
+    # TODO: test that this works as intended (seems to not)
     terms = terms.gsub(/-\n/, '')
 
     # strip punctuation and newlines (inverted, so select words including contractions)
