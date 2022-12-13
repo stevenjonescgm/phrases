@@ -40,6 +40,14 @@ So I decided to extract the operational class from the CLI entry point.
 1. Consider optimizing the phrases storage to be Binary Search Tree/Priority Search Tree to reduce cost of sorting
 2. explicit tests for BDD cases, eg "100 most common" and "bonus points"
 3. Another pass at cleaning up test output (especially skips)
+4. Readability edit pass on documentation (more concise, find omissions)
+5. Refactor operations for unit-testability
+6. Add test coverage for edge cases
+   1. extended character sets (especially other apostrophes)
+   2. extremely large data sets (exercise intended performance considerations)
+   3. non-text files/content in streams
+7. Deployment strategy, eg Makefile compile to single executable file
+8. Consider existing elements as candidates for "Bonus Points"
 
 # Known Bugs
 1. code was intended to squeeze hyphenated-end-of-line, but does not

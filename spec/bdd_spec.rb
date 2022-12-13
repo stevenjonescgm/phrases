@@ -29,12 +29,10 @@ describe 'Phrases BDD feature requirements' do
     end
 
     it 'should describe What you would do next, given more time (if anything)?' do
-      skip 'circle back after satisfaction'
       is_expected
     end
 
     it 'should describe Are there bugs that you are aware of?' do
-      skip 'circle back after satisfaction'
       is_expected
     end
   end
@@ -111,8 +109,16 @@ describe 'Phrases BDD feature requirements' do
         expect(app.phrases).to eq({"this optional ly" => 1, "optional ly splits" => 1})
       end
 
-      it %[ Unicode may also be handled in any way you like (including replacing it with a space)] do
-        skip 'TODO: not yet considered'
+      # Unicode may also be handled in any way you like (including replacing it with a space)
+      it %[Unicode may also be handled in any way you like (excluded as-if whitespace)] do
+        # unicode test strings, c/o https://nedbatchelder.com/blog/200310/unicode_test_strings.html
+        app = App.new
+        app.run(StringIO.new "test with «küßî» unicode")
+        expect(app.phrases).to eq({"test with k" => 1, "with k unicode" => 1})
+
+        app = App.new
+        app.run(StringIO.new "test with “ЌύБЇ” unicode")
+        expect(app.phrases).to eq({"test with unicode" => 1})
       end
     end
 
@@ -125,13 +131,9 @@ describe 'Phrases BDD feature requirements' do
         is_expected
       end
 
-      it 'Handling unicode or line-endings gracefully.'
-      it 'Running via Docker as well as via the command-line.'
-      it 'Something else that you think your team would find valuable (just make sure to document it so we know to look for it!)'
-
-      context 'Personal bonus points' do
-        it ''
-      end
+      # it 'Handling unicode or line-endings gracefully.'
+      # it 'Running via Docker as well as via the command-line.'
+      # it 'Something else that you think your team would find valuable (just make sure to document it so we know to look for it!)'
     end
 
   end
@@ -168,16 +170,16 @@ describe 'Phrases BDD feature requirements' do
 
     context "Bonus points for doing something extra and documenting it." do
       # Here are some examples that might be relevant to the team you're applying to:
-      it 'The tests clearly demonstrate both functional *and* unit style testing.'
+      # it 'The tests clearly demonstrate both functional *and* unit style testing.'
       #  Could use more functional encapsulation and targeted unit testing
 
-      it 'The tests cover boundary conditions and positive/negative tests.'
+      # it 'The tests cover boundary conditions and positive/negative tests.'
       #  Does consider some boundary conditions, eg
       #  * prioritizing whitespace over newline in parsing/streaming
       #  * no-arguments, no-stdin
 
-      it 'In addition to the main body of tests, the tests *also* cover other exploratory styles of testing such as fuzzing.'
-      it 'Something else that you think your team would find valuable (just make sure to document it so we know to look for it!)'
+      # it 'In addition to the main body of tests, the tests *also* cover other exploratory styles of testing such as fuzzing.'
+      # it 'Something else that you think your team would find valuable (just make sure to document it so we know to look for it!)'
     end
   end
 

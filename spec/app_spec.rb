@@ -13,16 +13,6 @@ describe 'App' do
     end
   end
 
-  context 'from file source' do
-    it 'runs provided files moby-dick.txt, brothers-karamazov.txt' do
-      skip 'covered in system test solution_spec.rb'
-    end
-  end
-
-  it 'consumes text from STDIN/StringIO' do
-    skip 'covered by system test solution_spec.rb'
-  end
-
   context 'trivial single source' do
     it 'parses basic phrase' do
       source = %w[some basic phrase]
